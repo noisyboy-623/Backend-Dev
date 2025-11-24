@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Note Taking App</title>
+</head>
+<body class="bg-gray-900 min-h-screen text-white p-6">
+  <div class="max-w-2xl mx-auto">
+    <h1 class="text-3xl font-bold mb-6 text-center"> Note Taking App</h1>
+
+    <!-- Form -->
+    <form action="/create" method="post" class="bg-gray-800 p-5 rounded-xl shadow-lg mb-6" novalidate>
+      <label for="title" class="sr-only">Title</label>
+      <input
+        id="title"
+        name="title"
+        type="text"
+        placeholder="Note Title"
+        class="w-full p-3 mb-3 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none"
+        required
+        aria-label="Note Title"
+      />
+
+      <label for="content" class="sr-only">Content</label>
+      <textarea
+        id="content"
+        name="content"
+        placeholder="Note Content"
+        class="w-full p-3 mb-3 h-28 rounded-lg bg-gray-700 border border-gray-600 resize-none focus:outline-none"
+        required
+        aria-label="Note Content"
+      ></textarea>
+
+      <button
+        type="submit"
+        class="w-full bg-blue-600 hover:bg-blue-700 transition p-3 rounded-lg font-semibold"
+      >
+        Add Note
+      </button>
+    </form>
+
+    <!-- Notes Section (static examples) -->
+    <h2 class="text-xl font-semibold mb-3">Your Notes</h2>
+    <div class="grid grid-cols-1 gap-4">
+      
+    </div>
+
+    <%if(files.length > 0) {%>
+        <% files.forEach(function(val){ %>
+            <div class="bg-gray-800 p-4 rounded-xl border border-gray-700 mb-3 shadow">
+                <h3 class="text-lg font-bold mb-2"> <%= val%></h3>
+                <div class="flex w-full justify-between items-center mt-3">
+                  <a class="text-blue-500 inline-block" href="/files/<%= val %>">read more...</a>
+                  <a class="text-zinc-600" href="/edit/<%= val %>">edit filename</a>
+                </div>
+            </div>
+        <% }) %>
+    <% } else { %>
+        <h3>No tasks yet...</h3>
+    <% } %>
+
+  </div>
+</body>
+</html>
